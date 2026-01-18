@@ -1,2 +1,0 @@
-cd C:\Users\Hyrican\Desktop\MixLab\src
-pyinstaller --onefile --windowed --name "MixLab" --add-data "assets;assets" --icon="assets/icon.ico" main.py
