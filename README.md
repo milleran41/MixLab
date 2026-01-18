@@ -29,6 +29,7 @@
 Ready-to-use Windows executable:
 
 👉 [Download MixLab.exe](https://github.com/andreas/mixlab/releases) *(update after publishing)*
+![MixLab Screenshot](assets/screenshot.png)
 
 > No installation needed. Just download and run!
 
