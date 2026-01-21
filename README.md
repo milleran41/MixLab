@@ -1,6 +1,6 @@
 # MixLab — Color Picker & Mixer
 
-![MixLab Screenshot](https://via.placeholder.com/800x400?text=MixLab+Screenshot)
+![MixLab Screenshot](src/assets/screenshot.png)
 
 **MixLab** is a free, offline color picker and mixer for artists, designers, painters, and anyone who works with colors.  
 ✅ No internet required  
