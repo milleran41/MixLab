@@ -2,7 +2,8 @@
 
 ![MixLab Screenshot](src/assets/screenshot.png)
 
-**MixLab** is a free, offline color picker and mixer for artists, designers, painters, and anyone who works with colors.  
+**MixLab** is a free, offline color picker and mixer for **artists, designers, painters, decorators, DIY enthusiasts, and anyone who works with paint or color matching**.  
+Perfect for choosing wall colors, mixing art supplies, or matching digital designs to physical materials.  
 ✅ No internet required  
 ✅ No ads  
 ✅ No tracking  
@@ -13,7 +14,7 @@
 
 ## ✨ Features
 
-- 🎨 **Color palette** with base pigments (red, yellow, blue, etc.)
+- 🎨 **Color palette** with base pigments (red, yellow, blue, green, violet, black, white)
 - 🖼️ **Load images** from your computer
 - 🔍 **Eyedropper tool** — pick any color from an image
 - 🔬 **Magnifier** — zoom into selected pixels
@@ -26,12 +27,11 @@
 
 ## 📦 Download
 
-Ready-to-use Windows executable:
+Ready-to-use Windows version:
 
-👉 [Download MixLab.exe](https://github.com/andreas/mixlab/releases) *(update after publishing)*
-![MixLab Screenshot](assets/screenshot.png)
+👉 [Download MixLab for Windows (v1.0)](https://github.com/milleran41/MixLab/releases/latest)
 
-> No installation needed. Just download and run!
+> No installation needed. Just download, extract the ZIP file, and run `MixLab.exe`!
 
 ---
 
@@ -43,7 +43,7 @@ Ready-to-use Windows executable:
 
 ### Steps
 ```bash
-git clone https://github.com/andreas/mixlab.git
-cd mixlab/src
+git clone https://github.com/milleran41/MixLab.git
+cd MixLab/src
 pip install -r requirements.txt
 python main.py
