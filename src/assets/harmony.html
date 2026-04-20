@@ -1,0 +1,122 @@
+<!doctype html><html lang="en" class="h-full"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Color Harmony Tool</title><script src="https://cdn.tailwindcss.com/3.4.17"></script><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"><style>html, body { height: 100%; margin: 0; }body { font-family: 'DM Sans', sans-serif; }.strip { transition: background-color 0.3s ease; }.letter-char { transition: color 0.3s ease; font-family: 'Playfair Display', serif; }svg * { transition: fill 0.3s ease, stroke 0.3s ease; }.harmony-btn { transition: all 0.2s ease; }.harmony-btn.active { transform: scale(1.05); }body { box-sizing: border-box; }</style><script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script></head><body class="h-full"><div id="app" class="h-full w-full overflow-auto" style="background:#0f0f13;"><div class="max-w-5xl mx-auto px-4 py-8"><h1 id="app-title" class="text-3xl font-bold mb-6" style="font-family:'Playfair Display',serif; color:#e8e4df;">Color Harmony Tool</h1><div class="flex flex-wrap items-center gap-4 mb-8"><div class="flex items-center gap-3"><label class="text-sm font-medium" style="color:#a09b94;" id="label-base-color">Base Color</label><div class="relative w-12 h-12 rounded-xl overflow-hidden border-2" style="border-color:#2a2a32;"><input type="color" id="colorPicker" value="#e05a3a" class="absolute inset-0 w-full h-full cursor-pointer opacity-0" style="z-index:2;"><div id="colorPreview" class="absolute inset-0" style="background:#e05a3a;"></div></div><span id="hexLabel" class="text-sm font-mono" style="color:#a09b94;">#E05A3A</span></div><div class="flex gap-2 flex-wrap" id="harmonyBtns"><button class="harmony-btn active px-4 py-2 rounded-lg text-sm font-medium" data-harmony="complementary" id="btn-complementary">Complementary</button> <button class="harmony-btn px-4 py-2 rounded-lg text-sm font-medium" data-harmony="triadic" id="btn-triadic">Triadic</button> <button class="harmony-btn px-4 py-2 rounded-lg text-sm font-medium" data-harmony="analogous" id="btn-analogous">Analogous</button> <button class="harmony-btn px-4 py-2 rounded-lg text-sm font-medium" data-harmony="tetradic" id="btn-tetradic">Tetradic</button></div></div><div class="mb-10"><p class="text-xs font-medium uppercase tracking-widest mb-3" style="color:#6b6760;" id="label-palette">Palette</p><div id="strips" class="flex gap-3 h-24 rounded-xl overflow-hidden"></div><div id="stripLabels" class="flex gap-3 mt-2"></div></div><div class="grid grid-cols-1 md:grid-cols-3 gap-6"><div class="rounded-2xl p-6" style="background:#1a1a22;"><p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:#6b6760;" id="label-figures">Figures</p><div id="figures" class="flex justify-around items-end h-40"></div></div><div class="rounded-2xl p-6" style="background:#1a1a22;"><p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:#6b6760;" id="label-houses">Houses</p><div id="houses" class="flex justify-around items-end h-40"></div></div><div class="rounded-2xl p-6 flex flex-col" style="background:#1a1a22;"><p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:#6b6760;" id="label-letters">Letters</p><div id="letters" class="flex-1 flex items-center justify-center"></div></div></div></div></div>
+<script>
+// Localization
+const i18n = {
+  en: { title: 'Color Harmony Tool', base_color: 'Base Color', palette: 'Palette', figures: 'Figures', houses: 'Houses', letters: 'Letters', complementary: 'Complementary', triadic: 'Triadic', analogous: 'Analogous', tetradic: 'Tetradic' },
+  ru: { title: 'Гармония цветов', base_color: 'Базовый цвет', palette: 'Палитра', figures: 'Фигуры', houses: 'Дома', letters: 'Буквы', complementary: 'Дополнительный', triadic: 'Триада', analogous: 'Аналогичный', tetradic: 'Тетрада' },
+  es: { title: 'Armonía de Colores', base_color: 'Color Base', palette: 'Paleta', figures: 'Figuras', houses: 'Casas', letters: 'Letras', complementary: 'Complementario', triadic: 'Triádico', analogous: 'Análogo', tetradic: 'Tetrádico' },
+  de: { title: 'Farbharmonie', base_color: 'Grundfarbe', palette: 'Palette', figures: 'Figuren', houses: 'Häuser', letters: 'Buchstaben', complementary: 'Komplementär', triadic: 'Triadisch', analogous: 'Analog', tetradic: 'Tetradisch' },
+  fr: { title: 'Harmonie des Couleurs', base_color: 'Couleur de Base', palette: 'Palette', figures: 'Figures', houses: 'Maisons', letters: 'Lettres', complementary: 'Complémentaire', triadic: 'Triadique', analogous: 'Analogue', tetradic: 'Tétradique' },
+  it: { title: 'Armonia dei Colori', base_color: 'Colore Base', palette: 'Tavolozza', figures: 'Figure', houses: 'Case', letters: 'Lettere', complementary: 'Complementare', triadic: 'Triadico', analogous: 'Analogo', tetradic: 'Tetradico' },
+  pt: { title: 'Harmonia de Cores', base_color: 'Cor Base', palette: 'Paleta', figures: 'Figuras', houses: 'Casas', letters: 'Letras', complementary: 'Complementar', triadic: 'Triádico', analogous: 'Análogo', tetradic: 'Tetrádico' },
+  ar: { title: 'تناسق الألوان', base_color: 'اللون الأساسي', palette: 'لوحة الألوان', figures: 'أشكال', houses: 'منازل', letters: 'حروف', complementary: 'تكميلي', triadic: 'ثلاثي', analogous: 'متماثل', tetradic: 'رباعي' },
+  zh: { title: '色彩和谐工具', base_color: '基础颜色', palette: '调色板', figures: '图形', houses: '房屋', letters: '字母', complementary: '互补色', triadic: '三角色', analogous: '类似色', tetradic: '四角色' },
+  ja: { title: 'カラーハーモニー', base_color: 'ベースカラー', palette: 'パレット', figures: '図形', houses: '家', letters: '文字', complementary: '補色', triadic: 'トライアド', analogous: '類似色', tetradic: 'テトラード' },
+  pl: { title: 'Harmonia Kolorów', base_color: 'Kolor Bazowy', palette: 'Paleta', figures: 'Figury', houses: 'Domy', letters: 'Litery', complementary: 'Dopełniający', triadic: 'Triadyczny', analogous: 'Analogiczny', tetradic: 'Tetradyczny' },
+  tr: { title: 'Renk Uyumu', base_color: 'Temel Renk', palette: 'Palet', figures: 'Şekiller', houses: 'Evler', letters: 'Harfler', complementary: 'Tamamlayıcı', triadic: 'Üçlü', analogous: 'Benzer', tetradic: 'Dörtlü' }
+};
+
+// Detect language from URL hash #lang=ru&color=e05a3a
+const parseHash = () => {
+  const hash = window.location.hash.slice(1);
+  const params = {};
+  hash.split('&').forEach(pair => {
+    const [key, value] = pair.split('=');
+    if (key && value) params[key] = value;
+  });
+  return params;
+};
+const hashParams = parseHash();
+const urlLang = hashParams.lang || 'en';
+const lang = i18n[urlLang] || i18n['en'];
+
+// Apply translations
+document.getElementById('app-title').textContent = lang.title;
+document.title = lang.title;
+document.getElementById('label-base-color').textContent = lang.base_color;
+document.getElementById('label-palette').textContent = lang.palette;
+document.getElementById('label-figures').textContent = lang.figures;
+document.getElementById('label-houses').textContent = lang.houses;
+document.getElementById('label-letters').textContent = lang.letters;
+document.getElementById('btn-complementary').textContent = lang.complementary;
+document.getElementById('btn-triadic').textContent = lang.triadic;
+document.getElementById('btn-analogous').textContent = lang.analogous;
+document.getElementById('btn-tetradic').textContent = lang.tetradic;
+
+// Color logic
+let baseColor = '#e05a3a';
+let activeHarmony = 'complementary';
+
+function hexToHsl(hex) {
+  let r=parseInt(hex.slice(1,3),16)/255, g=parseInt(hex.slice(3,5),16)/255, b=parseInt(hex.slice(5,7),16)/255;
+  let max=Math.max(r,g,b), min=Math.min(r,g,b), h, s, l=(max+min)/2;
+  if(max===min){h=s=0;}else{let d=max-min; s=l>0.5?d/(2-max-min):d/(max+min);
+  switch(max){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}}
+  return [h*360,s*100,l*100];
+}
+function hslToHex(h,s,l) {
+  h=((h%360)+360)%360;s/=100;l/=100;
+  let c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2,r=0,g=0,b=0;
+  if(h<60){r=c;g=x;}else if(h<120){r=x;g=c;}else if(h<180){g=c;b=x;}else if(h<240){g=x;b=c;}else if(h<300){r=x;b=c;}else{r=c;b=x;}
+  return '#'+[r+m,g+m,b+m].map(v=>Math.round(v*255).toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+function getPalette(hex,type) {
+  const [h,s,l]=hexToHsl(hex);
+  switch(type){
+    case 'complementary':return[hex,hslToHex(h+180,s,l)];
+    case 'triadic':return[hex,hslToHex(h+120,s,l),hslToHex(h+240,s,l)];
+    case 'analogous':return[hex,hslToHex(h+30,s,l),hslToHex(h-30,s,l)];
+    case 'tetradic':return[hex,hslToHex(h+90,s,l),hslToHex(h+180,s,l),hslToHex(h+270,s,l)];
+  }
+}
+function c(palette,i){return palette[i%palette.length];}
+function renderStrips(palette){
+  document.getElementById('strips').innerHTML=palette.map(col=>`<div class="strip flex-1 rounded-lg" style="background:${col};"></div>`).join('');
+  document.getElementById('stripLabels').innerHTML=palette.map(col=>`<div class="flex-1 text-center text-xs font-mono" style="color:#6b6760;">${col}</div>`).join('');
+}
+function figureSvg(color,i){const h=[100,120,110][i%3];return `<svg width="50" height="${h}" viewBox="0 0 50 ${h}"><circle cx="25" cy="14" r="12" fill="${color}"/><rect x="15" y="28" width="20" height="40" rx="6" fill="${color}"/><rect x="8" y="72" width="12" height="30" rx="5" fill="${color}"/><rect x="30" y="72" width="12" height="30" rx="5" fill="${color}"/></svg>`;}
+function houseSvg(w,r,d){return `<svg width="90" height="110" viewBox="0 0 90 110"><rect x="10" y="45" width="70" height="60" rx="4" fill="${w}"/><polygon points="45,5 5,48 85,48" fill="${r}"/><rect x="33" y="70" width="24" height="35" rx="3" fill="${d}"/><rect x="15" y="55" width="14" height="14" rx="2" fill="${r}" opacity="0.5"/><rect x="61" y="55" width="14" height="14" rx="2" fill="${r}" opacity="0.5"/></svg>`;}
+function renderAll(){
+  const palette=getPalette(baseColor,activeHarmony);
+  renderStrips(palette);
+  document.getElementById('figures').innerHTML=[0,1,2].map(i=>figureSvg(c(palette,i),i)).join('');
+  document.getElementById('houses').innerHTML=[0,1,2].map(i=>houseSvg(c(palette,i),c(palette,i+1),c(palette,i+2))).join('');
+  const word = 'COLOR';
+  document.getElementById('letters').innerHTML=word.split('').map((ch,i)=>`<span class="letter-char text-5xl font-black mx-0.5" style="color:${c(palette,i)}">${ch}</span>`).join('');
+}
+function styleButtons(){
+  const ac='#e05a3a', sc='#6b6760';
+  document.querySelectorAll('.harmony-btn').forEach(btn=>{
+    const isActive=btn.dataset.harmony===activeHarmony;
+    btn.style.background=isActive?ac:'transparent';
+    btn.style.color=isActive?'#fff':sc;
+    btn.style.border=isActive?'none':`1px solid ${sc}40`;
+    btn.classList.toggle('active',isActive);
+  });
+}
+document.getElementById('colorPicker').addEventListener('input',e=>{
+  baseColor=e.target.value;
+  document.getElementById('colorPreview').style.background=baseColor;
+  document.getElementById('hexLabel').textContent=baseColor.toUpperCase();
+  renderAll(); styleButtons();
+});
+document.getElementById('harmonyBtns').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-harmony]');
+  if(!btn)return;
+  activeHarmony=btn.dataset.harmony;
+  renderAll(); styleButtons();
+});
+
+// Init with color from hash #...&color=rrggbb
+const urlColor = hashParams.color ? '#' + hashParams.color : null;
+if (urlColor && /^#[0-9a-fA-F]{6}$/.test(urlColor)) {
+  baseColor = urlColor;
+  document.getElementById('colorPicker').value = urlColor;
+  document.getElementById('colorPreview').style.background = urlColor;
+  document.getElementById('hexLabel').textContent = urlColor.toUpperCase();
+}
+
+renderAll();
+styleButtons();
+</script>
+</body></html>
