@@ -42,6 +42,13 @@ Perfect for choosing wall colors, mixing art supplies, or matching digital desig
 > 2. Run `MixLab.exe`  
 > *First launch downloads QR code (requires internet). All subsequent uses work 100% offline.*
 
+### Security note
+
+MixLab is unsigned, so Windows SmartScreen or antivirus software may take extra time to check it on the first launch.
+
+- SHA256: `9BC7CD5B27B5C179D5F49EDE9D584EDBBC4AB04A6BD241B643BCCC6BBC717F4E`
+- VirusTotal: [check this file hash](https://www.virustotal.com/gui/file/9bc7cd5b27b5c179d5f49ede9d584edbbc4ab04a6bd241b643bccc6bbc717f4e/detection)
+
 ---
 
 ## 🎵 Color Harmony Tool
