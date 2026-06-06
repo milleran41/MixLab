@@ -35,12 +35,11 @@ Perfect for choosing wall colors, mixing art supplies, or matching digital desig
 
 ## 📦 Download (Windows)
 
-📥 **Direct download:** [**MixLab v1.0 for Windows (.zip)**](https://github.com/milleran41/MixLab/raw/main/MixLab-v1.0-win.zip)
+📥 **Direct download:** [**MixLab v1.0 for Windows (.exe)**](https://github.com/milleran41/MixLab/raw/main/MixLab.exe)
 
 > No installation required!  
 > 1. Click the link above — download starts immediately  
-> 2. Extract the archive  
-> 3. Run `MixLab.exe`  
+> 2. Run `MixLab.exe`  
 > *First launch downloads QR code (requires internet). All subsequent uses work 100% offline.*
 
 ---
