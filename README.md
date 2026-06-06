@@ -29,7 +29,7 @@ Perfect for choosing wall colors, mixing art supplies, or matching digital desig
 - 🎵 **Color Harmony Tool** — opens an interactive browser page showing complementary, triadic, analogous and tetradic palettes for the selected color, with live visual demos
 - ➕ **Manual mixer** — create custom blends with adjustable parts (only pure pigments allowed)
 - 🌍 **12 languages**: English, Русский, Español, Deutsch, Français, Italiano, Português, العربية, 中文, 日本語, Polski, Türkçe — all UI elements including the harmony tool are fully localized
-- 💙 **Developer support** — optional QR code donations via Ko-fi (downloads automatically on first launch)
+- 💙 **Developer support** — optional QR code donations via Ko-fi
 
 ---
 
@@ -41,7 +41,7 @@ The Windows executable is currently being rechecked after antivirus warnings on 
 Until the result is clarified, the direct `.exe` download has been removed.
 
 > You can still build MixLab from source using the instructions below.  
-> *First launch downloads QR code (requires internet). All subsequent uses work 100% offline.*
+> MixLab works 100% offline after download.
 
 ### Security note
 

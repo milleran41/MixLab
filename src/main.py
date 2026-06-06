@@ -4,7 +4,6 @@ from PIL import Image, ImageTk
 import os
 import sys
 import webbrowser
-import urllib.request
 import threading
 import math
 from typing import Any, Callable, Dict, List, Optional, Tuple
@@ -749,24 +748,17 @@ def resource_path(relative_path: str) -> str:
 # === Функция загрузки QR-кода ===
 def ensure_qr_exists() -> str:
     qr_path = resource_path("assets/qr-donate.png")
-    os.makedirs(os.path.dirname(qr_path), exist_ok=True)
     if not os.path.exists(qr_path):
+        # Создаём локальную заглушку без сетевых запросов.
         try:
-            urllib.request.urlretrieve(
-                "https://raw.githubusercontent.com/milleran41/MixLab/main/assets/qr-donate.png",
-                qr_path
-            )
-        except Exception as e:
-            print(f"Failed to download QR code: {e}")
-            # Создаём заглушку
-            try:
-                from PIL import Image, ImageDraw
-                img = Image.new('RGB', (120, 120), color='white')
-                draw = ImageDraw.Draw(img)
-                draw.text((10, 50), "QR not available", fill='black')
-                img.save(qr_path)
-            except:
-                pass
+            os.makedirs(os.path.dirname(qr_path), exist_ok=True)
+            from PIL import Image, ImageDraw
+            img = Image.new('RGB', (120, 120), color='white')
+            draw = ImageDraw.Draw(img)
+            draw.text((10, 50), "QR not available", fill='black')
+            img.save(qr_path)
+        except Exception:
+            pass
     return qr_path
 
 # === Функции интерфейса ===
