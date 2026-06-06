@@ -35,7 +35,7 @@ Perfect for choosing wall colors, mixing art supplies, or matching digital desig
 
 ## 📦 Download (Windows)
 
-📥 [**Download MixLab v1.0 for Windows**](https://github.com/milleran41/MixLab/raw/main/MixLab-v1.0-win.zip)
+📥 **Direct download:** [**MixLab v1.0 for Windows (.zip)**](https://github.com/milleran41/MixLab/raw/main/MixLab-v1.0-win.zip)
 
 > No installation required!  
 > 1. Click the link above — download starts immediately  
