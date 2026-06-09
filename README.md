@@ -35,20 +35,19 @@ Perfect for choosing wall colors, mixing art supplies, or matching digital desig
 
 ## 📦 Download (Windows)
 
-📥 **Direct download:** [**MixLab v1.0 Portable for Windows (.zip)**](https://github.com/milleran41/MixLab/raw/main/MixLab-portable-v1.0-win.zip)
+📥 **Direct download:** [**MixLab v1.0 for Windows (.exe)**](https://github.com/milleran41/MixLab/raw/main/MixLab.exe)
 
 > No installation required!  
 > 1. Click the link above — download starts immediately  
-> 2. Extract the archive  
-> 3. Open the `MixLab` folder and run `MixLab.exe`  
+> 2. Run `MixLab.exe`  
 > MixLab works 100% offline after download.
 
 ### Security note
 
 MixLab is unsigned, so Windows SmartScreen or antivirus software may take extra time to check it on the first launch.
 
-- ZIP SHA256: `36F309D0C86022382CA029BCD5721D0C549C100DEE8A28241615BA61B2CD154F`
-- Portable EXE SHA256: `72CE4653E8E752222689D482950E9F585B90C309AF2C51CF0666B9AD6B09200C`
+- SHA256: `870093287DEF6FB3A12B8523705745E7515CA937AE848827367608E7C53B8765`
+- VirusTotal: 3/70 detections, with no Microsoft Defender detection in the latest scan.
 
 ---
 
